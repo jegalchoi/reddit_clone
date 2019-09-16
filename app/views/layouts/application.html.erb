@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <nav>
+      <% if logged_in? %>
+        <%= current_user.username %>
+        <%= button_to "Logout", session_url, action: "delete", method: "delete" %>      
+      <% end %>
+    </nav>
     <%= yield %>
   </body>
 </html>
