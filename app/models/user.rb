@@ -18,6 +18,8 @@ class User < ApplicationRecord
   validates :session_token, presence: true
   validates :password_digest, presence: { message: "Password can't be blank" }
 
+  has_many :subs
+
   after_initialize :ensure_session_token
 
   def self.generate_session_token
