@@ -14,6 +14,6 @@ FactoryBot.define do
   factory :sub do
     title { Faker::Book.title }
     description { Faker::Quote.singular_siegler }
-    user_id { 4 }
+    user_id { 1 }
   end
 end

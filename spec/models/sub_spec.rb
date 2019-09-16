@@ -23,5 +23,6 @@ RSpec.describe Sub, type: :model do
 
   describe "associations" do
     it { should belong_to(:moderator) }
+    it { should have_many(:posts) }
   end
 end
