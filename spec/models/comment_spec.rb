@@ -26,5 +26,6 @@ RSpec.describe Comment, type: :model do
     it { should belong_to(:author) }
     it { should belong_to(:post) }
     it { should have_many(:child_comments) }
+    it { should have_many(:votes) }
   end
 end
