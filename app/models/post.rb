@@ -15,5 +15,6 @@ class Post < ApplicationRecord
   validates :title, presence: true, uniqueness: true
   validates :sub_id, presence: true
 
-  belongs_to :sub
+  has_many :post_subs
+  has_many :subs, through: :post_subs
 end

@@ -20,6 +20,6 @@ class Sub < ApplicationRecord
     foreign_key: 'user_id',
     class_name: 'User'
 
-  has_many :posts
-  
+  has_many :post_subs
+  has_many :posts, through: :post_subs
 end

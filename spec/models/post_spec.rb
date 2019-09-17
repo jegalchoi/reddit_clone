@@ -22,6 +22,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe "associations" do
-    it { should belong_to(:sub) }
+    it { should have_many(:post_subs) }
+    it { should have_many(:subs) }
   end
 end
