@@ -24,5 +24,6 @@ RSpec.describe Post, type: :model do
   describe "associations" do
     it { should have_many(:post_subs) }
     it { should have_many(:subs) }
+    it { should have_many(:comments) }
   end
 end

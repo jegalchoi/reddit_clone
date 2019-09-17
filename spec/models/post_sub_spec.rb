@@ -12,5 +12,15 @@
 require 'rails_helper'
 
 RSpec.describe PostSub, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:post_sub) { build(:post_sub) }
+
+  describe "validations" do
+    it { should validate_presence_of(:sub_id) }
+    it { should validate_presence_of(:post_id) }
+  end
+
+  describe "associations" do
+    it { should belong_to(:sub) }
+    it { should belong_to(:post) }
+  end
 end

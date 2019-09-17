@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :password_digest, presence: { message: "Password can't be blank" }
 
   has_many :subs
+  has_many :comments
 
   after_initialize :ensure_session_token
 
