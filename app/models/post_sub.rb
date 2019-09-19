@@ -10,8 +10,8 @@
 #
 
 class PostSub < ApplicationRecord
-  validates :sub_id, presence: true
-  validates :post_id, presence: true
+  validates :sub, presence: true
+  validates :post, presence: true
 
   belongs_to :sub
   belongs_to :post

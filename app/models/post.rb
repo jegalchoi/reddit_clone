@@ -6,17 +6,26 @@
 #  title      :string           not null
 #  url        :string           not null
 #  content    :text             not null
-#  sub_id     :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
 #
 
 class Post < ApplicationRecord
   validates :title, presence: true, uniqueness: true
-  validates :sub_id, presence: true
+  validates :user_id, presence: true
+  validates :subs, presence: { message: 'must have at least one sub' }
 
-  has_many :post_subs
+  has_many :post_subs, inverse_of: :post, dependent: :destroy
+
   has_many :subs, through: :post_subs
-  has_many :comments
+
+  belongs_to :author,
+    primary_key: 'id',
+    foreign_key: 'user_id',
+    class_name: 'User'
+
+  has_many :comments, inverse_of: :post
+  
   has_many :votes, as: :votable
 end

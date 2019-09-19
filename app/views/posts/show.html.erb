@@ -1,0 +1,25 @@
+<h1><%= @post.title %> by <%= @post.author.username %></h1>
+
+Content:
+<br><br>
+<%= @post.content %>
+<br><br>
+
+<h4>Subs</h4>
+<ul>
+  <% @post.subs.each do |sub| %>
+    <li>
+      <%= link_to sub.title, sub_url(sub) %>
+      <br>
+    </li>
+  <% end %>
+</ul>
+
+<h2>Comments</h2>
+
+<%= link_to 'Comment on this post!', new_post_comment_url(@post) %>
+<br><br>
+
+<%= render 'comment', parent: @post.comments.where(parent_comment_id: nil) %>
+
+<%= link_to 'Edit', edit_post_url(@post) %>

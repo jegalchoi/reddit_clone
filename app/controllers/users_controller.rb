@@ -16,11 +16,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def placeholder
-    @current_user = current_user
-    render 'placeholder'
-  end
-
   private
 
     def user_params

@@ -6,9 +6,9 @@
 #  title      :string           not null
 #  url        :string           not null
 #  content    :text             not null
-#  sub_id     :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer          not null
 #
 
 FactoryBot.define do
@@ -16,6 +16,6 @@ FactoryBot.define do
     title { Faker::Book.title }
     url { Faker::Internet.url }
     content { Faker::Food.description }
-    sub_id { 1 }
+    user_id { 1 }
   end
 end
