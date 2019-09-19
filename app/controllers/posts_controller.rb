@@ -42,6 +42,7 @@ class PostsController < ApplicationController
 
   def show
     find_post
+    @all_comments = @post.comments.includes(:author)
   end
 
   private

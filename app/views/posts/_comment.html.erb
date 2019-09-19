@@ -1,17 +1,16 @@
 <ul>
-    <% parent.each do |comment| %>
+    <% parent.each do |c1| %>
       <li>
-        <%= link_to comment.content, comment_url(comment) %>
+        <%= link_to c1.content, comment_url(c1) %>
       </li>
       <ul>
-        <% comment.child_comments.each do |child_comment| %>
+        <% @all_comments.where(parent_comment_id: c1.id).each do |c2| %>
             <li>
-              <%= link_to child_comment.content, comment_url(child_comment) %>
+              <%= link_to c2.content, comment_url(c2) %>
             </li>
-            <%= render 'comment', parent: child_comment.child_comments.where(parent_comment_id: child_comment.id) %>          
-          <br>
+            <%= render 'comment', parent: @all_comments.where(parent_comment_id: c2.id) %>
         <% end %>
-        <br>
+        
       </ul>
     <% end %>
 </ul>
