@@ -42,7 +42,7 @@ class PostsController < ApplicationController
 
   def show
     find_post
-    @all_comments = @post.comments.includes(:author)
+    @comments_by_parent_id = @post.comments_by_parent_id
   end
 
   private

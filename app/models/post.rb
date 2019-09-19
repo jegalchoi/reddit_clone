@@ -28,4 +28,12 @@ class Post < ApplicationRecord
   has_many :comments, inverse_of: :post
   
   has_many :votes, as: :votable
+
+  def comments_by_parent_id
+    comments = Hash.new { |h,k| h[k] = [] }
+    self.comments.includes(:author).each do |comment|
+      comments[comment.parent_comment_id] << comment
+    end
+    comments
+  end
 end

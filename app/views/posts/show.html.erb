@@ -20,6 +20,6 @@ Content:
 <%= link_to 'Comment on this post!', new_post_comment_url(@post) %>
 <br><br>
 
-<%= render 'comment', parent: @all_comments.where.not('parent_comment_id IS NOT NULL') %>
+<%= render 'comment', parent: @comments_by_parent_id[nil] %>
 
 <%= link_to 'Edit', edit_post_url(@post) %>

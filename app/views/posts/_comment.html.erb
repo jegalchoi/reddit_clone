@@ -3,14 +3,6 @@
       <li>
         <%= link_to c1.content, comment_url(c1) %>
       </li>
-      <ul>
-        <% @all_comments.where(parent_comment_id: c1.id).each do |c2| %>
-            <li>
-              <%= link_to c2.content, comment_url(c2) %>
-            </li>
-            <%= render 'comment', parent: @all_comments.where(parent_comment_id: c2.id) %>
-        <% end %>
-        
-      </ul>
+      <%= render 'comment', parent: @comments_by_parent_id[c1.id] %>
     <% end %>
 </ul>
