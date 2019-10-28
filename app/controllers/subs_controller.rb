@@ -44,17 +44,21 @@ class SubsController < ApplicationController
   end
 
   private
-
     def sub_params
       params.require(:sub).permit(:title, :description, :user_id)
     end
 
-    def require_moderator!
-      find_sub
-      redirect_to sub_url(@sub) unless current_user == @sub.moderator
-    end
-
     def find_sub
       @sub = Sub.find_by(id: params[:id])
+    end
+
+    def require_moderator!
+      find_sub
+      
+      unless current_user == @post.moderator
+        @post.errors.add(:User, "is not moderator of sub")
+        flash[:errors] = @sub.errors.full_messages 
+        redirect_to sub_url(@sub) 
+      end
     end
 end
