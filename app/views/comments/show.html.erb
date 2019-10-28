@@ -1,3 +1,8 @@
+<%= @comment.votes.sum('value') %> upvotes
+<br><br>
+<%= button_to "Upvote", upvote_comment_url(@comment), action: "post", method: "post" %>
+<%= button_to "Downvote", downvote_comment_url(@comment), action: "post", method: "post" %>
+
 <h4>Reply to this comment: </h4>
 
 <form action="/comments" method="POST">

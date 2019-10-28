@@ -1,5 +1,6 @@
 class SubsController < ApplicationController
   before_action :require_moderator!, only: [:edit, :update]
+  before_action :require_user!, only: [:create]
 
   def new
     @sub = Sub.new
@@ -38,6 +39,8 @@ class SubsController < ApplicationController
 
   def show
     find_sub
+    #@posts = Post.joins(:votes).select('SUM(value) as sum').order('sum DESC')
+    @posts = @sub.posts
   end
 
   private

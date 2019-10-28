@@ -4,4 +4,11 @@
 <br><br>
 <%= link_to 'Make New Post!', new_post_url %>
 <br><br>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      (<%= post.votes.sum('value') %>) <%= link_to post.title, post_url(post) %>
+    </li>
+  <% end %>
+</ul>
 <%= link_to 'Edit', edit_sub_url(@sub) %>

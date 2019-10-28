@@ -12,13 +12,15 @@
 #
 
 class Post < ApplicationRecord
+  include Votable
+  
   validates :title, presence: true, uniqueness: true
   validates :user_id, presence: true
-  validates :subs, presence: { message: 'must have at least one sub' }
+  validate :at_least_one_sub
 
   has_many :post_subs, inverse_of: :post, dependent: :destroy
 
-  has_many :subs, through: :post_subs
+  has_many :subs, through: :post_subs, source: :sub
 
   belongs_to :author,
     primary_key: 'id',
@@ -26,8 +28,6 @@ class Post < ApplicationRecord
     class_name: 'User'
 
   has_many :comments, inverse_of: :post
-  
-  has_many :votes, as: :votable
 
   def comments_by_parent_id
     comments = Hash.new { |h,k| h[k] = [] }
@@ -35,5 +35,11 @@ class Post < ApplicationRecord
       comments[comment.parent_comment_id] << comment
     end
     comments
+  end
+
+  def at_least_one_sub
+    if self.sub_ids.empty?
+      errors.add(:post, "must have at least one sub")
+    end
   end
 end

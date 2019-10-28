@@ -12,6 +12,8 @@
 #
 
 class Comment < ApplicationRecord
+  include Votable
+  
   validates :content, presence: true
 
   belongs_to :author,
@@ -32,6 +34,4 @@ class Comment < ApplicationRecord
     foreign_key: 'parent_comment_id',
     class_name: 'Comment',
     optional: true
-    
-  has_many :votes, as: :votable  
 end

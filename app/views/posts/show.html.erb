@@ -1,9 +1,11 @@
-<h1><%= @post.title %> by <%= @post.author.username %></h1>
+<h1>(<%= @post.votes.sum('value') %>) <%= @post.title %> by <%= @post.author.username %></h1>
 
 Content:
 <br><br>
 <%= @post.content %>
 <br><br>
+<%= button_to "Upvote", upvote_post_url(@post), action: "post", method: "post" %>
+<%= button_to "Downvote", downvote_post_url(@post), action: "post", method: "post" %>
 
 <h4>Subs</h4>
 <ul>

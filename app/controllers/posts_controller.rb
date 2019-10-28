@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_author!, only: [:edit, :update]
+  before_action :require_user!, only: [:new, :create, :upvote, :downvote]
 
   def new
     @post = Post.new
@@ -9,15 +10,10 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.sub_ids = params[:sub_ids]
     @subs = Sub.all
     
     if @post.save
-      unless params[:sub_ids].nil?
-        params[:sub_ids].each do |sub_id|
-          PostSub.create!(post_id: @post.id, sub_id: sub_id)
-        end
-      end
-      
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
@@ -32,10 +28,12 @@ class PostsController < ApplicationController
 
   def update
     find_post
+    @subs = Sub.all
 
     if @post.update_attributes(post_params)
       redirect_to post_url(@post)
     else
+      flash.now[:errors] = @post.errors.full_messages
       render :edit
     end
   end
@@ -43,6 +41,16 @@ class PostsController < ApplicationController
   def show
     find_post
     @comments_by_parent_id = @post.comments_by_parent_id
+  end
+
+  def upvote
+    find_post
+    vote_up(@post)
+  end
+
+  def downvote
+    find_post
+    vote_down(@post)
   end
 
   private
@@ -56,6 +64,11 @@ class PostsController < ApplicationController
 
     def require_author!
       find_post
-      redirect_to post_url(@post) unless current_user == @post.author
+      
+      unless current_user == @post.author
+        @post.errors.add(:User, "is not author of sub")
+        flash[:errors] = @post.errors.full_messages 
+        redirect_to post_url(@post) 
+      end
     end
 end
