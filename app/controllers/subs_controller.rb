@@ -55,8 +55,8 @@ class SubsController < ApplicationController
     def require_moderator!
       find_sub
       
-      unless current_user == @post.moderator
-        @post.errors.add(:User, "is not moderator of sub")
+      unless current_user == @sub.moderator
+        @sub.errors.add(:User, "is not moderator of sub")
         flash[:errors] = @sub.errors.full_messages 
         redirect_to sub_url(@sub) 
       end
