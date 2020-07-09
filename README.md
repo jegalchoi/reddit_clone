@@ -1,24 +1,22 @@
-# README
+# Reddit Clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[thawing-brook-75126.herokuapp.com](https://thawing-brook-75126.herokuapp.com)
 
-Things you may want to cover:
+Reddit Clone is a clone of Reddit where users can submit posts, comment and vote.
 
-* Ruby version
+## Features
+- View all the subs  
+- Create a sub  
+- Edit subs  
+- View posts  
+- Create a post  
+- Edit posts  
+- Comment on posts  
+- Vote on posts  
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Technologies 
+- backend - Rails  
+- database - PostgreSQL  
+- authentication system - HTTP cookies & Rails session data  
+- password encryption - BCrypt    
+- site deployment - Heroku  
